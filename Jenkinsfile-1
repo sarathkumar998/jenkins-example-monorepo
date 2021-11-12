@@ -3,14 +3,6 @@ pipeline {
     label 'linux'
   }
   stages {
-    stage('checkout to determine changesets') {
-      agent { 
-        label 'linux'
-      }
-      steps {
-        checkout scm
-      }
-    }
     stage('Build Frontend') {
       agent { 
         docker { 
