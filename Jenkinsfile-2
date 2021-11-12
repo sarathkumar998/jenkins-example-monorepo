@@ -1,6 +1,8 @@
 @Library('shared-library') _
 pipeline {
-  agent none
+  agent {
+    label 'linux'
+  }
   stages {
     stage('Build Frontend') {
       when {
