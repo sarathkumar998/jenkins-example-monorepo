@@ -20,7 +20,6 @@ pipeline {
       }
       when {
         changeset "**/frontend/*.*"
-        beforeAgent true
       }
       steps {
         dir('frontend') {
@@ -39,7 +38,6 @@ pipeline {
       }
       when {
         changeset "**/backend/web/*.*"
-        beforeAgent true
       }
       steps {
         dir ('backend/web') {
@@ -55,7 +53,6 @@ pipeline {
       }
       when {
         changeset "**/backend/api/*.*"
-        beforeAgent true
       }
       steps {
         dir ('backend/api') {
