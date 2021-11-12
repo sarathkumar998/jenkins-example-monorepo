@@ -1,44 +1,7 @@
 @Library('shared-library') _
-pipeline {
-  agent {
-    label 'linux'
-  }
-  stages {
-    stage('Build Frontend') {
-      when {
-        changeset "**/frontend/*.*"
-        beforeAgent true
-      }
-      steps {
-        monoRepoFrontendPipeline {
-          agent = 'node:17.1.0-bullseye'
-          directory = 'frontend'
-        }
-      }
-    }
-    stage('Build Web') {
-      when {
-        changeset "**/backend/web/*.*"
-        beforeAgent true
-      }
-      steps {
-        monoRepoBackendWebPipeline {
-          agent = 'maven:3.8.3-openjdk-17'
-          directory = 'backend/web'
-        }
-      }
-    }
-    stage('Build REST API') {
-      when {
-        changeset "**/backend/api/*.*"
-        beforeAgent true
-      }
-      steps {
-        monoRepoBackendApiPipeline {
-          agent = 'golang:1.17.3-bullseye'
-          directory = 'backend/api'
-        }
-      }
-    }
-  }
+monoRepoPipeline {
+  baseAgent = 'linux'
+  frontendAgent = 'node:17.1.0-bullseye'
+  backendWebAgent = 'maven:3.8.3-openjdk-17'
+  backendApiAgent = 'golang:1.17.3-bullseye'
 }
